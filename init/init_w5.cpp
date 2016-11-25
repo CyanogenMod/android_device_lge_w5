@@ -70,7 +70,7 @@ void vendor_load_properties()
     char device[PROP_VALUE_MAX];
     char devicename[PROP_VALUE_MAX];
 
-    property_get("ro.boot.serialno", serial);
+    std::strcpy (serial, property_get("ro.boot.serialno").c_str());
     if (strncmp(serial, "LGD320", 6) == 0) {
         if (check_cmdline("model.name=LG-D320n") == 1) {
                 property_set("ro.product.device", "w5");
@@ -109,7 +109,7 @@ void vendor_load_properties()
         property_set("telephony.lteOnCdmaDevice", "0");
     }
 
-    property_get("ro.product.device", device);
+    std::strcpy (device, property_get("ro.product.device").c_str());
     strlcpy(devicename, device, sizeof(devicename));
     ERROR("Found hardware id: %s setting build properties for %s device\n", serial, devicename);
 }
